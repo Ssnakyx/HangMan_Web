@@ -4,13 +4,11 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"sync"
 
 	hangman "github.com/Ssnakyx/HangMan____"
 )
 
 var (
-	mu           sync.Mutex
 	currentWord  string
 	foundLetters []string
 )
@@ -24,8 +22,6 @@ type HangManData struct {
 }
 
 func Home(w http.ResponseWriter, r *http.Request) {
-	mu.Lock()
-	defer mu.Unlock()
 
 	if currentWord == "" {
 		words, err := hangman.ReadWordsFromFile("words.txt")
@@ -52,8 +48,6 @@ func Home(w http.ResponseWriter, r *http.Request) {
 }
 
 func FormulaireHandler(w http.ResponseWriter, r *http.Request) {
-	mu.Lock()
-	defer mu.Unlock()
 
 	if r.Method == "POST" {
 		err := r.ParseForm()
@@ -100,10 +94,18 @@ func VictoirePage(w http.ResponseWriter, r *http.Request) {
 	template.Execute(w, nil)
 }
 
+func DefeatePage(w http.ResponseWriter, r *http.Request) {
+	template, err := template.ParseFiles("HTMLL/defaite.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+	template.Execute(w, nil)
+}
 func main() {
 	http.HandleFunc("/", Home)
 	http.HandleFunc("/hangman", FormulaireHandler)
 	http.HandleFunc("/victoire", VictoirePage)
+	http.HandleFunc("/defeate", DefeatePage)
 	fs := http.FileServer(http.Dir("CSS/"))
 	http.Handle("/CSS/", http.StripPrefix("/CSS", fs))
 	log.Println("Serveur allumé")

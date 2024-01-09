@@ -1,150 +1,172 @@
-package main
-
-import (
-	"bufio"
-	"log"
-	"math/rand"
-	"net/http"
-	"os"
-	"text/template"
-	"time"
-)
-
-type HangManData struct {
-	WordToGuess       string
-	DisplayedWord     string
-	Found             []string
-	AttemptsRemaining int
-	GameStage         []string
-	Lettre            string
-}
-
-func Home(w http.ResponseWriter, r *http.Request) {
-	template, err := template.ParseFiles("HTMLL/forms.html", "HTMLL/footer.html", "HTMLL/header.html")
-	if err != nil {
-		log.Fatal(err)
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 83vh;
+  }
+  
+  .bouton {
+	display: block;
+	background-color: #719fee;
+	border-radius: 50px;
+	border: 5px double #1f69ec;
+	color: #ffffff;
+	text-align: center;
+	font-size: 30px;
+	padding: 10px;
+	width: 200px;
+	cursor: pointer;
+	transition: all 0.5s;
+	margin-top: 5px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  .bouton:hover {
+	background-color: #9d00ff;
+	border: 10px solid #fcfcfc;
+	box-shadow: 10px 10px 10px #719fee;
+	color: #ffffff;
+	text-align: center;
+	font-size: 22px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  .bouton-rond:hover {
+	background-color: #4f00fb;
+  }
+  
+  #Zone_Text {
+	width: 190px;
+	height: 40px;
+	border-radius: 20px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-size: 25px;
+	text-align: center;
+  }
+  
+  .Titre {
+	text-align: center;
+	background-color: #9198e5;
+	border: 7px solid #fcfcfc;
+	box-shadow: 10px 10px 10px #e66465;
+	color: #ffffff;
+	text-align: center;
+	font-size: 50px;
+	border-radius:50px ;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  .Facile {
+	margin-right: 50px;
+	padding: 10px;
+	width: 190px;
+	height: 40px;
+	height: 5vh;
+	text-align: center;
+	background-color: #9198e5;
+	border: 7px solid #fcfcfc;
+	box-shadow: -10px -10px 10px #719fee;
+	color: #ffffff;
+	font-size: 50px;
+	border-radius:50px ;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	
 	}
-	template.Execute(w, nil)
-}
-
-func ChooseFile(w http.ResponseWriter, r *http.Request) {
-	choice := 1
-	wordToGuess := GetRandomWord(choice)
-	http.Redirect(w, r, "/", http.StatusFound)
-	_ = wordToGuess
-}
-
-func FormulaireHandler(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "POST" {
-		err := r.ParseForm()
-		if err != nil {
-			http.Error(w, "Erreur", http.StatusInternalServerError)
-			return
-		}
-
-		lettre := r.FormValue("Lettre")
-
-		choice := 1
-		wordToGuess := GetRandomWord(choice)
-
-		data := HangManData{
-			WordToGuess:       wordToGuess,
-			Found:             []string{lettre},
-			AttemptsRemaining: 6,
-			GameStage:         []string{},
-			Lettre:            lettre,
-		}
-
-		data.DisplayedWord = DisplayGameStatus(data.WordToGuess, data.Found, data.AttemptsRemaining, data.GameStage)
-
-		template, err := template.ParseFiles("HTMLL/forms.html", "HTMLL/footer.html", "HTMLL/header.html")
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		template.Execute(w, data)
-		return
+  
+  .Normal{
+	padding: 10px;
+	width: 180px;
+	height: 20px;
+	height: 5vh;
+	background-color: #9198e5;
+	border: 7px solid #fcfcfc;
+	box-shadow: -10px -10px 10px #719fee;
+	color: #ffffff;
+	text-align: center;
+	font-size: 50px;
+	border-radius:50px ;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  .Difficile{
+	margin-left: 50px;
+	padding: 10px;
+	width: 190px;
+	height: 40px;
+	height: 5vh;
+	text-align: center;
+	text-align: center;
+	background-color: #9198e5;
+	border: 7px solid #fcfcfc;
+	box-shadow: -10px -10px 10px #719fee;
+	color: #ffffff;
+	text-align: center;
+	font-size: 50px;
+	border-radius:50px ;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  .Zone_mots {
+	width: 500px;
+	height: 100px;
+	background: rgb(160, 68, 68);
+	display: flex;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: -250px;
+	margin-top: 100px;
+	padding: 10px;
+	border: 7px solid #ffffff ;
+	border-radius:50px ;
+	font-size: 50px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 	}
-
-	http.Redirect(w, r, "http://localhost:8080", http.StatusFound)
-}
-
-func GetRandomWord(choice int) string {
-	var filename string
-	switch choice {
-	case 1:
-		filename = "words.txt"
-	case 2:
-		filename = "words2.txt"
-	case 3:
-		filename = "words3.txt"
+  
+	.body {
+	  background: linear-gradient(#9198e5, pink);
+	  
 	}
-
-	words, err := ReadWordsFromFile(filename)
-	if err != nil {
-		log.Fatal(err)
+	
+	.Allignament{
+	  display: flex;
+	  margin-left: 310px;
 	}
-
-	rand.Seed(time.Now().UnixNano())
-	return GetRandomWordFromList(words)
-}
-
-func DisplayGameStatus(word string, found []string, attemptsRemaining int, stage []string) string {
-	return DisplayWord(word, found)
-}
-
-func DisplayWord(word string, found []string) string {
-	displayedWord := ""
-	for _, letter := range word {
-		if Contains(found, string(letter)) {
-			displayedWord += string(letter) + " "
-		} else {
-			displayedWord += "_ "
-		}
-	}
-	return displayedWord
-}
-
-func Contains(slice []string, s string) bool {
-	for _, value := range slice {
-		if value == s {
-			return true
-		}
-	}
-	return false
-}
-
-func ReadWordsFromFile(filename string) ([]string, error) {
-	file, err := os.Open(filename)
-	if err != nil {
-		return nil, err
-	}
-	defer file.Close()
-
-	var words []string
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		words = append(words, scanner.Text())
-	}
-
-	if err := scanner.Err(); err != nil {
-		return nil, err
-	}
-
-	return words, nil
-}
-
-func GetRandomWordFromList(words []string) string {
-	randIndex := rand.Intn(len(words))
-	return words[randIndex]
-}
-
-func main() {
-	http.HandleFunc("/", Home)
-	http.HandleFunc("/hangman", FormulaireHandler)
-	http.HandleFunc("/choosefile", ChooseFile)
-	fs := http.FileServer(http.Dir("CSS/"))
-	http.Handle("/CSS/", http.StripPrefix("/CSS", fs))
-	log.Println("Serveur allumé")
-	http.ListenAndServe(":8080", nil)
-}
+  
+  
+  .bodyy {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	margin: 0;
+	background: linear-gradient(#9198e5, pink);
+  }
+  
+  .victoire {
+	padding: 60px;
+	width: 180px;
+	height: 20px;
+	height: 12vh;
+	background-color: #9198e5;
+	border: 7px solid #fcfcfc;
+	box-shadow: -10px -10px 10px #719fee;
+	text-align: center;
+	font-size: 50px;
+	border-radius: 90px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
+  .boutonPlayAgain {
+	padding: 10px;
+	width: 200px;
+	height: 15px;
+	height: 10vh;
+	background-color: #9198e5;
+	border: 7px solid #fcfcfc;
+	box-shadow: -10px -10px 10px #719fee;
+	padding: 20px;
+	text-align: center;
+	font-size: 50px;
+	border-radius: 50px;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+  
