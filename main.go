@@ -1,4 +1,4 @@
-package main
+package HangMan_Web
 
 import HangMan_Web "HangMan_Web/Go"
 
