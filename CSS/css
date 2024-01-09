@@ -46,7 +46,7 @@
 
 .Titre {
   text-align: center;
-  background-color: #52c12d;
+  background-color: #9198e5;
   border: 7px solid #fcfcfc;
   box-shadow: 10px 10px 10px #e66465;
   color: #ffffff;
@@ -122,13 +122,47 @@
   }
 
   .body {
-    background: url(deyuin6-c7ad1dee-e0ae-423c-8e1a-bc4addf550e0.gif) ;
+    background: linear-gradient(#9198e5, pink);
     
   }
   
   .Allignament{
     display: flex;
     margin-left: 310px;
-    
   }
 
+
+.bodyy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(#9198e5, pink);
+}
+
+.victoire {
+  padding: 60px;
+  width: 180px;
+  height: 20px;
+  height: 12vh;
+  background-color: #9198e5;
+  border: 7px solid #fcfcfc;
+  box-shadow: -10px -10px 10px #719fee;
+  text-align: center;
+  font-size: 50px;
+  border-radius: 90px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.boutonPlayAgain {
+  width: 200px;
+  padding: 20px;
+  background-color: #9198e5;
+  border: 7px solid #fcfcfc;
+  box-shadow: -10px -10px 10px #719fee;
+  text-align: center;
+  font-size: 50px;
+  border-radius: 50px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
