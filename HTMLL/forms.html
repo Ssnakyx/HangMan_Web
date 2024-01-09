@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HangMan</title>
+    <link rel="stylesheet" href="/CSS/Bouton.css">
+    {{template "header"}}
+</head>
+<body class="body">
+    <div class="Zone_mots">{{.DisplayedWord}}</div>
+    <div class="container">
+        <form method="POST" action="/hangman">
+            <label for="Zone_Text"></label><br />
+            <input type="text" name="Lettre" id="Zone_Text" >
+            <br />
+            <input class="bouton" type="submit"> 
+        </form>
+    </div>
+    {{template "footer"}}
+</body>
+</html>
+

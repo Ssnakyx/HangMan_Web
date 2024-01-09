@@ -1,0 +1,27 @@
+<!-- niveau.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choisissez le niveau de difficulté</title>
+    <link rel="stylesheet" href="/CSS/Bouton.css">
+</head>
+<body class="body">
+    <h1>Choisissez le niveau de difficulté :</h1>
+
+    <form method="POST" action="/choosedifficulty">
+        <label for="difficulty">Niveau :</label>
+        <select id="difficulty" name="difficulty">
+            <option value="1">Facile</option>
+            <option value="2">Normal</option>
+            <option value="3">Difficile</option>
+        </select>
+
+        <br />
+
+        <input class="bouton" type="submit" value="Commencer">
+    </form>
+</body>
+</html>
