@@ -132,28 +132,3 @@
     
   }
 
-
-
-.bodyy {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
-  background: url(deyuin6-c7ad1dee-e0ae-423c-8e1a-bc4addf550e0.gif) ;
-}
-
-.victoire {
-  padding: 60px;
-  width: 180px;
-  height: 60px;
-  height: 12vh;
-  background-color: #9198e5;
-  border: 7px solid #fcfcfc;
-  box-shadow: -10px -10px 10px #719fee;
-
-  text-align: center;
-  font-size: 50px;
-  border-radius: 50px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
