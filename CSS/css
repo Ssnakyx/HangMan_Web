@@ -1,8 +1,3 @@
-body {
-  background: linear-gradient(#9198e5, pink);
-  margin: 0;
-}
-
 .container {
   display: flex;
   align-items: center;
@@ -10,29 +5,30 @@ body {
   height: 83vh;
 }
 
-.bouton, .BoutonValidation, .bouton-rond, .boutonPlayAgain {
+.bouton {
   display: block;
-  width: 200px;
-  padding: 10px;
-  font-size: 30px;
+  background-color: #719fee;
   border-radius: 50px;
+  border: 5px double #1f69ec;
+  color: #ffffff;
+  text-align: center;
+  font-size: 30px;
+  padding: 10px;
+  width: 200px;
   cursor: pointer;
   transition: all 0.5s;
+  margin-top: 5px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.bouton, .BoutonValidation {
-  background-color: #719fee;
-  border: 5px double #1f69ec;
-  color: #ffffff;
-}
-
-.bouton:hover, .BoutonValidation:hover {
+.bouton:hover {
   background-color: #9d00ff;
   border: 10px solid #fcfcfc;
   box-shadow: 10px 10px 10px #719fee;
   color: #ffffff;
+  text-align: center;
   font-size: 22px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .bouton-rond:hover {
@@ -54,38 +50,98 @@ body {
   border: 7px solid #fcfcfc;
   box-shadow: 10px 10px 10px #e66465;
   color: #ffffff;
+  text-align: center;
   font-size: 50px;
-  border-radius: 50px;
+  border-radius:50px ;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
+
+.BoutonValidation {
+  margin: 75px;
+  margin-left: 299px;
+  display: block;
+  background-color: #719fee;
+  border-radius: 50px;
+  border: 5px double #1f69ec;
+  color: #ffffff;
+  text-align: center;
+  font-size: 30px;
+  padding: 10px;
+  width: 200px;
+  cursor: pointer;
+  transition: all 0.5s;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
+  .BoutonValidation:hover {
+    background-color: #9d00ff;
+    border: 10px solid #fcfcfc;
+    box-shadow: 10px 10px 10px #719fee;
+    color: #ffffff;
+    text-align: center;
+    font-size: 22px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+
 
 .Zone_mots {
   width: 500px;
   height: 100px;
   background-color: #9198e5;
   display: flex;
-  margin: 100px auto -250px auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: -250px;
+  margin-top: 100px;
   padding: 10px;
-  border: 7px solid #ffffff;
-  border-radius: 50px;
+  border: 7px solid #ffffff ;
+  border-radius:50px ;
   font-size: 50px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
+  }
 
-.Allignament {
+  .body {
+    background: linear-gradient(#9198e5, pink);
+    
+  }
+  
+  .Allignament{
+    display: flex;
+    margin-left: 312px;
+  }
+
+
+.bodyy {
   display: flex;
-  margin-left: 312px;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+  background: linear-gradient(#9198e5, pink);
 }
 
-.victoire, .boutonPlayAgain {
-  width: 200px;
+.victoire {
+  padding: 60px;
+  width: 180px;
+  height: 20px;
   height: 12vh;
-  padding: 60px 20px;
   background-color: #9198e5;
   border: 7px solid #fcfcfc;
   box-shadow: -10px -10px 10px #719fee;
   text-align: center;
   font-size: 50px;
   border-radius: 90px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.boutonPlayAgain {
+  width: 200px;
+  padding: 20px;
+  background-color: #9198e5;
+  border: 7px solid #fcfcfc;
+  box-shadow: -10px -10px 10px #719fee;
+  text-align: center;
+  font-size: 50px;
+  border-radius: 50px;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }

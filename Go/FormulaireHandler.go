@@ -4,12 +4,12 @@ import (
 	"html/template"
 	"log"
 	"net/http"
+	"strconv"
 
 	hangman "github.com/Ssnakyx/HangMan____"
 )
 
 func FormulaireHandler(w http.ResponseWriter, r *http.Request) {
-
 	if r.Method == "POST" {
 		err := r.ParseForm()
 		if err != nil {
@@ -19,10 +19,16 @@ func FormulaireHandler(w http.ResponseWriter, r *http.Request) {
 
 		lettre := r.FormValue("Lettre")
 		foundLetters = append(foundLetters, lettre)
+		if len(foundLetters) > 10 {
+			currentWord = pickNewWord()
+			foundLetters = []string{}
+			http.Redirect(w, r, "/defaite?currentWord="+currentWord, http.StatusFound)
+			return
+		}
 
 		data := HangManData{
 			WordToGuess:       currentWord,
-			AttemptsRemaining: 6,
+			AttemptsRemaining: 10 - len(foundLetters),
 			GameStage:         []string{},
 			Lettre:            lettre,
 		}
@@ -30,7 +36,6 @@ func FormulaireHandler(w http.ResponseWriter, r *http.Request) {
 		data.DisplayedWord = hangman.DisplayWord(currentWord, foundLetters)
 
 		if hangman.IsWordGuessed(currentWord, foundLetters) {
-
 			http.Redirect(w, r, "/victoire", http.StatusFound)
 			return
 		}
@@ -45,4 +50,38 @@ func FormulaireHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	http.Redirect(w, r, "/", http.StatusFound)
+}
+
+func pickNewWord() string {
+	words, err := hangman.ReadWordsFromFile("words/words.txt")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return hangman.GetRandomWordFromList(words)
+}
+func StartGamePage(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		err := r.ParseForm()
+		if err != nil {
+			http.Error(w, "Erreur", http.StatusInternalServerError)
+			return
+		}
+
+		http.Redirect(w, r, "/hangman", http.StatusFound)
+		return
+	}
+
+	template, err := template.ParseFiles("HTMLL/startgame.html", "HTMLL/footer.html", "HTMLL/header.html")
+	if err != nil {
+		http.Error(w, "Nul", http.StatusInternalServerError)
+		return
+	}
+	template.Execute(w, nil)
+	pseudo := r.FormValue("pseudo")
+
+	score := 10
+
+	http.Redirect(w, r, "/hangman?pseudo="+pseudo+"&score="+strconv.Itoa(score), http.StatusFound)
+	return
 }

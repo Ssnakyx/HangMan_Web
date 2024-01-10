@@ -17,14 +17,16 @@ type HangManData struct {
 	AttemptsRemaining int
 	GameStage         []string
 	Lettre            string
+	Score             int
 }
 
 func Serveur() {
 	http.HandleFunc("/levels", LevelsPage)
 	http.HandleFunc("/", Home)
+	http.HandleFunc("/startgame", StartGamePage)
 	http.HandleFunc("/hangman", FormulaireHandler)
 	http.HandleFunc("/victoire", VictoirePage)
-	http.HandleFunc("/defeate", DefeatePage)
+	http.HandleFunc("/defaite", DefeatePage)
 	fs := http.FileServer(http.Dir("CSS/"))
 	http.Handle("/CSS/", http.StripPrefix("/CSS", fs))
 	log.Println("Serveur allumé")
