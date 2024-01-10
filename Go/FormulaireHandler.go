@@ -4,7 +4,6 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"strconv"
 
 	hangman "github.com/Ssnakyx/HangMan____"
 )
@@ -67,21 +66,13 @@ func StartGamePage(w http.ResponseWriter, r *http.Request) {
 			http.Error(w, "Erreur", http.StatusInternalServerError)
 			return
 		}
-
 		http.Redirect(w, r, "/hangman", http.StatusFound)
 		return
 	}
-
 	template, err := template.ParseFiles("HTMLL/startgame.html", "HTMLL/footer.html", "HTMLL/header.html")
 	if err != nil {
 		http.Error(w, "Nul", http.StatusInternalServerError)
 		return
 	}
 	template.Execute(w, nil)
-	pseudo := r.FormValue("pseudo")
-
-	score := 10
-
-	http.Redirect(w, r, "/hangman?pseudo="+pseudo+"&score="+strconv.Itoa(score), http.StatusFound)
-	return
 }

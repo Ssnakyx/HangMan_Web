@@ -17,7 +17,6 @@ type HangManData struct {
 	AttemptsRemaining int
 	GameStage         []string
 	Lettre            string
-	Score             int
 }
 
 func Serveur() {
