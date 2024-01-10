@@ -23,3 +23,5 @@ Assurez-vous d'avoir Go installé sur votre machine avant de lancer le projet.
 2. Accerder au site Web :
     pour accerder au site web copier ce lien dans vptre navigateur :
     http://localhost:8080/startgame
+
+Le mot a trouver va s'afficher dans l'url A cause d'un beug que je n'ai pas reussi a regler
