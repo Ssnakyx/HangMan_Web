@@ -21,7 +21,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 
 	data := HangManData{
 		WordToGuess:       currentWord,
-		AttemptsRemaining: 6,
+		AttemptsRemaining: 10,
 		GameStage:         []string{},
 		Lettre:            "",
 		DisplayedWord:     hangman.DisplayWord(currentWord, foundLetters),
