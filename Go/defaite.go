@@ -7,7 +7,7 @@ import (
 )
 
 func DefeatePage(w http.ResponseWriter, r *http.Request) {
-	template, err := template.ParseFiles("HTMLL/defaite.html")
+	template, err := template.ParseFiles("HTMLL/defaite.html", "HTMLL/header.html")
 	if err != nil {
 		log.Fatal(err)
 	}

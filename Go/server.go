@@ -8,6 +8,7 @@ import (
 var (
 	currentWord  string
 	foundLetters []string
+	WordToGuess  string
 )
 
 type HangManData struct {
@@ -19,6 +20,7 @@ type HangManData struct {
 }
 
 func Serveur() {
+	http.HandleFunc("/levels", LevelsPage)
 	http.HandleFunc("/", Home)
 	http.HandleFunc("/hangman", FormulaireHandler)
 	http.HandleFunc("/victoire", VictoirePage)

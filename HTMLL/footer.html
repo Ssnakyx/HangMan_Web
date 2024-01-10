@@ -1,9 +1,13 @@
 {{define "footer"}}
 <link rel="stylesheet" href="/CSS/Bouton.css">
 
+<form method="POST" action="/choosedifficulty"></form>
 <div class="Allignament">
-    <button type="submit" class="Facile">Facile</button>
-    <button type="submit" class="Normal">Normal</button>
-    <button type="submit" class="Difficile">Difficile</button>
+<footer>
+    <button value="1" type="submit" class="BoutonValidation">Facile</button>
+    <button value="2" type="submit" class="BoutonValidation">Normal</button>
+    <button value="3" type="submit" class="BoutonValidation">Difficile</button>
+    <button value="3" type="submit" class="BoutonValidation">About</button>
 </div>
+</footer>
 {{end}}

@@ -7,7 +7,7 @@ import (
 )
 
 func VictoirePage(w http.ResponseWriter, r *http.Request) {
-	template, err := template.ParseFiles("HTMLL/victoire.html")
+	template, err := template.ParseFiles("HTMLL/victoire.html", "HTMLL/header.html")
 	if err != nil {
 		log.Fatal(err)
 	}
